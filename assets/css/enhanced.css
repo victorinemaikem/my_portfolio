@@ -1,0 +1,598 @@
+/**
+ * Enhanced Dynamic Styles for Victorine Maikem Portfolio
+ * - Improved contact form with floating labels
+ * - Dynamic animations and micro-interactions
+ * - Enhanced visual feedback
+ */
+
+/* ========================================
+   CSS Variables for theming
+======================================== */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 30px rgba(102, 126, 234, 0.25);
+    --glow-primary: 0 0 30px rgba(102, 126, 234, 0.4);
+}
+
+/* ========================================
+   Typing Animation for Hero
+======================================== */
+.typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--primary-color, #667eea);
+    margin-left: 5px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
+}
+
+.hero-title-animated {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: revealText 2s ease-out forwards;
+}
+
+@keyframes revealText {
+    from {
+        max-width: 0;
+    }
+
+    to {
+        max-width: 100%;
+    }
+}
+
+/* ========================================
+   Enhanced Contact Form
+======================================== */
+.bx-contact-section .contact-form-enhanced {
+    background: #667eea;
+    border-radius: 24px;
+    padding: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: var(--transition-smooth);
+}
+
+.bx-contact-section .contact-form-enhanced:hover {
+    box-shadow: 0 15px 50px rgba(102, 126, 234, 0.25);
+    border-color: rgba(102, 126, 234, 0.4);
+}
+
+/* Floating Label Input Group */
+.floating-label-group {
+    position: relative;
+    margin-bottom: 28px;
+}
+
+.floating-label-group input,
+.floating-label-group textarea {
+    width: 100%;
+    padding: 20px 20px 10px 20px;
+    font-size: 16px;
+    background: rgba(40, 40, 50, 0.8);
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 12px;
+    color: #fff;
+    transition: var(--transition-smooth);
+    outline: none;
+}
+
+.floating-label-group input::placeholder,
+.floating-label-group textarea::placeholder {
+    color: transparent;
+}
+
+.floating-label-group input:focus,
+.floating-label-group textarea:focus {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.15);
+    box-shadow: var(--glow-primary);
+}
+
+.floating-label-group label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    transition: var(--transition-smooth);
+    background: transparent;
+    padding: 0 5px;
+}
+
+.floating-label-group textarea~label {
+    top: 25px;
+}
+
+.floating-label-group input:focus~label,
+.floating-label-group input:not(:placeholder-shown)~label,
+.floating-label-group textarea:focus~label,
+.floating-label-group textarea:not(:placeholder-shown)~label {
+    top: 0;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #667eea;
+    background: rgba(23, 23, 28, 1);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Input validation states */
+.floating-label-group.success input,
+.floating-label-group.success textarea {
+    border-color: var(--success-color);
+}
+
+.floating-label-group.success label {
+    color: var(--success-color);
+}
+
+.floating-label-group.error input,
+.floating-label-group.error textarea {
+    border-color: var(--error-color);
+    animation: shake 0.5s ease-in-out;
+}
+
+.floating-label-group.error label {
+    color: var(--error-color);
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    20%,
+    60% {
+        transform: translateX(-5px);
+    }
+
+    40%,
+    80% {
+        transform: translateX(5px);
+    }
+}
+
+/* Validation icon */
+.floating-label-group .validation-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.floating-label-group textarea~.validation-icon {
+    top: 25px;
+}
+
+.floating-label-group.success .validation-icon {
+    opacity: 1;
+    color: var(--success-color);
+}
+
+.floating-label-group.error .validation-icon {
+    opacity: 1;
+    color: var(--error-color);
+}
+
+/* Error message */
+.error-message {
+    display: block;
+    color: var(--error-color);
+    font-size: 12px;
+    margin-top: 5px;
+    padding-left: 20px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.floating-label-group.error .error-message {
+    opacity: 1;
+    height: auto;
+    padding-top: 5px;
+}
+
+/* Enhanced Submit Button */
+.submit-btn-enhanced {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 45px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+    min-width: 200px;
+}
+
+.submit-btn-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
+}
+
+.submit-btn-enhanced:hover::before {
+    left: 100%;
+}
+
+.submit-btn-enhanced:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.submit-btn-enhanced:active {
+    transform: translateY(-1px);
+}
+
+.submit-btn-enhanced.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.submit-btn-enhanced .btn-text {
+    transition: var(--transition-smooth);
+}
+
+.submit-btn-enhanced .btn-loader {
+    position: absolute;
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.submit-btn-enhanced.loading .btn-text {
+    opacity: 0;
+}
+
+.submit-btn-enhanced.loading .btn-loader {
+    opacity: 1;
+}
+
+/* Spinner animation */
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Success state */
+.submit-btn-enhanced.success {
+    background: var(--success-color);
+}
+
+/* Form message */
+.form-message-enhanced {
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 25px;
+    display: none;
+    align-items: center;
+    gap: 15px;
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-message-enhanced.show {
+    display: flex;
+}
+
+.form-message-enhanced.success {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid var(--success-color);
+    color: var(--success-color);
+}
+
+.form-message-enhanced.error {
+    background: rgba(239, 68, 68, 0.15);
+    border: 1px solid var(--error-color);
+    color: var(--error-color);
+}
+
+.form-message-enhanced .message-icon {
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+/* ========================================
+   Dynamic Service Cards
+======================================== */
+.section-card {
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.section-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transition: 0.6s;
+}
+
+.section-card:hover::before {
+    left: 100%;
+}
+
+.section-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+.section-card .sr-no h6 {
+    transition: var(--transition-smooth);
+}
+
+.section-card:hover .sr-no h6 {
+    transform: scale(1.2);
+    color: #667eea;
+}
+
+/* ========================================
+   Portfolio Hover Effects
+======================================== */
+.hovereffect {
+    transition: var(--transition-smooth);
+}
+
+.hovereffect:hover {
+    transform: scale(1.03);
+}
+
+.hovereffect .overlay {
+    transition: var(--transition-smooth);
+}
+
+.portfolio-img img {
+    transition: var(--transition-smooth);
+}
+
+.hovereffect:hover .portfolio-img img {
+    transform: scale(1.1);
+}
+
+/* ========================================
+   Timeline Animations
+======================================== */
+.timeline-item {
+    transition: var(--transition-smooth);
+}
+
+.timeline-item:hover {
+    transform: translateX(10px);
+}
+
+.timeline-marker {
+    transition: var(--transition-smooth);
+}
+
+.timeline-item:hover .timeline-marker {
+    transform: scale(1.3);
+    box-shadow: var(--glow-primary);
+}
+
+/* ========================================
+   News Cards Animation
+======================================== */
+.news-carousel .card {
+    transition: var(--transition-smooth);
+}
+
+.news-carousel .card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* ========================================
+   Scroll Progress Indicator
+======================================== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--primary-gradient);
+    z-index: 9999;
+    transition: width 0.1s linear;
+}
+
+/* ========================================
+   Counter Animation Styles
+======================================== */
+.counter-animated {
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========================================
+   Pulse Animation for CTA buttons
+======================================== */
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.6);
+    }
+
+    70% {
+        box-shadow: 0 0 0 20px rgba(102, 126, 234, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+    }
+}
+
+/* ========================================
+   Social Links in Contact
+======================================== */
+.social-links-contact {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.social-links-contact a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    font-size: 20px;
+    transition: var(--transition-smooth);
+}
+
+.social-links-contact a:hover {
+    background: var(--primary-gradient);
+    border-color: #667eea;
+    transform: translateY(-5px) rotate(5deg);
+    box-shadow: var(--glow-primary);
+}
+
+/* ========================================
+   Contact Info Cards
+======================================== */
+.contact-info-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 20px;
+    transition: var(--transition-smooth);
+}
+
+.contact-info-card:hover {
+    border-color: rgba(102, 126, 234, 0.3);
+    transform: translateX(10px);
+}
+
+.contact-info-card .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    font-size: 24px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.contact-info-card .info h5 {
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.contact-info-card .info p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+/* ========================================
+   Responsive Adjustments
+======================================== */
+@media (max-width: 768px) {
+    .bx-contact-section .contact-form-enhanced {
+        padding: 30px 20px;
+    }
+
+    .floating-label-group input,
+    .floating-label-group textarea {
+        padding: 18px 15px 8px 15px;
+    }
+
+    .floating-label-group label {
+        left: 15px;
+    }
+
+    .submit-btn-enhanced {
+        width: 100%;
+        padding: 16px 30px;
+    }
+
+    .social-links-contact {
+        justify-content: center;
+    }
+}
