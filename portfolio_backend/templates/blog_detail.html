@@ -7,9 +7,11 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-    <title>{{ post.title }} - {{ settings.hero_name }}</title>
-    <meta name="description" content="{{ post.excerpt }}">
-    <meta name="author" content="{{ post.author }}">
+    <title>{{ settings.hero_name|default:"Maikem Victorine" }} - Personal Portfolio.</title>
+    <meta name="keywords" content="Victorine,Maikem,Health Informatics,Health Technology">
+    <meta name="description" content="{{ settings.hero_name|default:" Victorine Maikem" }} - Health Informatics and
+        Health Technology Professional Portfolio.">
+    <meta name="author" content="victorine">
 
     <!-- site Favicon -->
     {% if settings.favicon %}
@@ -21,14 +23,26 @@
     <!-- css All Plugins Files -->
     <link rel="stylesheet" href="{% static 'css/plugins/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/plugins/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins/jquery.fancybox.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/plugins/aos.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/plugins/owl.carousel.min.css' %}">
 
     <!-- Main Style -->
     <link rel="stylesheet" id="main_style" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
 
+    <!-- Enhanced Dynamic Styles -->
+    <link rel="stylesheet" href="{% static 'css/enhanced.css' %}">
+
     <!-- Blog Detail Styles -->
     <style>
+        /* Fix logo aspect ratio */
+        header .navbar-brand img {
+            width: 90px;
+            height: auto;
+            object-fit: contain;
+        }
+
         body.body-bg {
             background-color: #fff;
             color: #333;
@@ -409,7 +423,7 @@
 <body class="body-bg">
 
     <!-- Header section -->
-    <header class="bg bx-static" style="position: fixed; width: 100%; z-index: 1000;">
+    <!-- <header class="bg bx-static" style="position: fixed; width: 100%; z-index: 1000;">
         <div class="container">
             <div class="nav-sec">
                 <nav class="navbar navbar-expand-lg navbar-dark">
@@ -422,6 +436,57 @@
                                 src="{% static 'img/logo/logo1.png' %}" alt="logo"></a>
                         {% endif %}
                         <a class="custom-btn bx-btn" href="{% url 'portfolio:index' %}">Back to Home</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header> -->
+
+    <!-- Header section -->
+    <header class="bg bx-static">
+        <div class="container">
+            <div class="nav-sec padding-b-50">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <div class="container-fluid">
+                        {% if settings.logo %}
+                        <a class="navbar-brand" href="{% url 'portfolio:index' %}"><img src="{{ settings.logo.url }}"
+                                alt="logo"></a>
+                        {% else %}
+                        <a class="navbar-brand" href="{% url 'portfolio:index' %}"><img
+                                src="{% static 'img/logo/logo1.png' %}" alt="logo"></a>
+                        {% endif %}
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav" id="top-menu">
+                                <li class="nav-item">
+                                    <a class="nav-link bx-nav" href="{% url 'portfolio:index' %}#home">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link bx-nav" href="{% url 'portfolio:index' %}#about">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link bx-nav"
+                                        href="{% url 'portfolio:index' %}#experience">Experience</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link bx-nav"
+                                        href="{% url 'portfolio:index' %}#portfolio">Portfolio</a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link bx-nav" href="{% url 'portfolio:index' %}#news">Writing &
+                                        Insights</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link bx-nav" href="{% url 'portfolio:index' %}#contact">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <a class="custom-btn bx-btn m-r-5px" href="{% url 'portfolio:index' %}#portfolio">View My
+                            Work</a>
                     </div>
                 </nav>
             </div>
@@ -441,7 +506,7 @@
                     <div class="blog-meta">
                         <span><i class="fa-regular fa-calendar"></i> {{ post.published_date|date:"F d, Y" }}</span>
                         <span><i class="fa-regular fa-user"></i> {{ post.author }}</span>
-                        <span><i class="fa-regular fa-comments"></i> {{ post.comments_count }} 
+                        <span><i class="fa-regular fa-comments"></i> {{ post.comments_count }}
                             Comment{{post.comments_count|pluralize }}</span>
                     </div>
                     <h1 class="blog-title">{{ post.title }}</h1>
@@ -456,7 +521,7 @@
 
                 <!-- Blog Content -->
                 <div class="blog-content">
-                    {{ post.content|linebreaks }}
+                    {{ post.content|safe }}
                 </div>
             </article>
 

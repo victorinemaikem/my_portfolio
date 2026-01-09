@@ -76,7 +76,7 @@
                                     <a class="nav-link bx-nav" href="#portfolio">Portfolio</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link bx-nav" href="#news">News</a>
+                                    <a class="nav-link bx-nav" href="#news">Writing & Insights</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link bx-nav" href="#contact">Contact</a>
@@ -105,7 +105,7 @@
                             <span class="primary-color">{{ settings.hero_greeting }}</span>
                             <h3>{{ settings.hero_name }}</h3>
                             <h2 class="hero-typed">{{ settings.hero_title }}</h2>
-                            <p>{{ settings.hero_description|linebreaks }}</p>
+                            <p class="hero-description">{{ settings.hero_description|linebreaks }}</p>
 
                             <div class="buttons">
                                 <a class="custom-btn bx-btn" href="#portfolio">View My Work</a>
@@ -122,6 +122,17 @@
                             <img src="{% static 'img/bg/girl.png' %}" alt="">
                             {% endif %}
                         </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile-only description row -->
+            <div class="row mobile-hero-description">
+                <div class="col-12">
+                    <p>{{ settings.hero_description|linebreaks }}</p>
+                    <div class="buttons">
+                        <button type="button" class="custom-btn bx-btn"
+                            onclick="document.querySelector('#portfolio').scrollIntoView({behavior: 'smooth'});">My
+                            Work</button>
                     </div>
                 </div>
             </div>
@@ -278,7 +289,7 @@
                                     <div class="timeline-info">
                                         <span>{{ exp.date_range }}</span>
                                     </div>
-                                    <h5 class="timeline-title">{{ exp.organization }} <span class="sub">- {{ exp.role }}</span></h5>
+                                    <h5 class="timeline-title">{{ exp.organization }} <span class="sub">- {{exp.role}}</span></h5>
 
                                     <p>{{ exp.description }}</p>
                                 </div>
@@ -350,7 +361,7 @@
                                                         <p class="bx-modal-lead">{{ project.description }}</p>
                                                         {% if project.link %}
                                                         <a href="{{ project.link }}" target="_blank"
-                                                            class="custom-btn bx-btn mt-3">View Project</a>
+                                                            class="custom-btn bx-btn mt-3" style="color: white;">View Project</a>
                                                         {% endif %}
                                                     </div>
                                                 </div>
@@ -364,7 +375,7 @@
                                                     <img src="{% static 'img/portfolio/img-1.jpg' %}"
                                                         alt="{{ project.title }}">
                                                     {% endif %}
-                                                    <h3>{% for cat in project.categories.all %}<span>{{ cat.name }}</span>{% endfor %}</h3>
+                                                    <h3>{% for cat in project.categories.all %}<span>{{cat.name}}</span>{% endfor %}</h3>
 
                                                     <a class="bx-portfolio-click" data-fancybox
                                                         data-src="#project-{{ project.id }}" href="javascript:;"
@@ -373,7 +384,8 @@
                                                 <div class="overlay">
                                                     <div class="overlay-info">
                                                         <a class="info" data-fancybox
-                                                            data-src="#project-{{ project.id }}" href="javascript:;">{{ project.title }}</a>
+                                                            data-src="#project-{{ project.id }}" href="javascript:;">
+                                                            {{project.title }}</a>
 
                                                         <a class="info" data-fancybox
                                                             data-src="#project-{{ project.id }}" href="javascript:;"><i
@@ -416,7 +428,7 @@
             <div class="row">
                 <div class="title">
                     <p class="light-txt">blogs</p>
-                    <h2>Latest<span class="primary-clr"> news</span></h2>
+                    <h2>Writings &<span class="primary-clr"> Insights</span></h2>
                 </div>
             </div>
             <div class="bx-news-detail">
@@ -435,7 +447,8 @@
                                             <img src="{% static 'img/news/img-2.jpg' %}" alt="{{ post.title }}">
                                             {% endif %}
                                             <div class="news-card-details">
-                                                <p class="primary-clr">By {{ post.author }} <span class="comments">- {{ post.comments_count }} Comments</span></p>
+                                                <p class="primary-clr">By {{ post.author }} <span class="comments">-
+                                                        {{post.comments_count }} Comments</span></p>
 
                                                 <h5>{{ post.title }}</h5>
                                                 <div class="read-more-btn">Read More <span class="info"><i

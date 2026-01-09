@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class SiteSettings(models.Model):
@@ -163,8 +164,8 @@ class BlogPost(models.Model):
     slug = models.SlugField(unique=True)
     author = models.CharField(max_length=100, default="Admin")
     image = models.ImageField(upload_to='blog/')
-    excerpt = models.TextField(max_length=300)
-    content = models.TextField()
+    excerpt = models.TextField(max_length=300)  # Short excerpt, no rich text needed
+    content = CKEditor5Field('Content', config_name='extends')
     published_date = models.DateTimeField(default=timezone.now)
     comments_count = models.PositiveIntegerField(default=0)
     is_published = models.BooleanField(default=True)
