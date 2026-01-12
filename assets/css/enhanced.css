@@ -474,6 +474,7 @@
     transition: var(--transition-smooth);
 }
 
+
 .timeline-item:hover {
     transform: translateX(10px);
 }
