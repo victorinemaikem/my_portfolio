@@ -312,44 +312,80 @@
 
   .bx-home .container .row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-top: 80px;
+  }
+
+  .bx-home .col-md-6:first-child {
+    width: 55%;
+    flex: 0 0 55%;
+    order: 1;
+  }
+
+  .bx-home .col-md-6:last-child {
+    width: 45%;
+    flex: 0 0 45%;
+    order: 2;
   }
 
   .bx-home .profile-img {
     display: block;
     text-align: center;
-    margin-bottom: 30px;
   }
 
   .bx-home .profile-img .profile-detail {
-    max-width: 280px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
   }
 
   .bx-home .profile-img .profile-detail img {
+    width: 100%;
     max-width: 100%;
     height: auto;
+    object-fit: contain;
   }
 
-  .bx-home .col-md-6:last-child {
-    order: -1;
+  .bx-home .basic-details {
+    width: 100%;
   }
 
   .bx-home .basic-details .info {
     height: auto;
-    min-height: 40vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    text-align: center;
-    padding-bottom: 30px;
+    min-height: auto;
+    display: block;
+    text-align: left;
+    padding: 10px;
+  }
+
+  .bx-home .basic-details .info .primary-color {
+    font-size: 0.85rem;
+  }
+
+  .bx-home .basic-details .info h3 {
+    font-size: 1.3rem;
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+
+  .bx-home .basic-details .info h2 {
+    display: none;
+  }
+
+  .bx-home .basic-details .info p {
+    display: none;
+  }
+
+  .bx-home .basic-details .info .buttons {
+    display: none;
+  }
+
+  /* Full width description and button below the side-by-side section */
+  .bx-home .container::after {
+    content: '';
+    display: block;
+    clear: both;
   }
 
   .bx-about-section .title {

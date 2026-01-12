@@ -20,6 +20,55 @@
 }
 
 /* ========================================
+   Mobile Hero Description (hidden on desktop)
+======================================== */
+.mobile-hero-description {
+    display: none;
+}
+
+@media only screen and (max-width: 767px) {
+    .mobile-hero-description {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 20px 15px;
+        margin-top: 20px;
+        position: relative;
+        z-index: 100;
+    }
+
+    /* Disable pointer events on ALL overlaying elements so buttons are clickable */
+    .bx-home .parallax,
+    .bx-home img.parallax,
+    .bx-home:after,
+    .bx-home::after {
+        pointer-events: none !important;
+    }
+
+    .mobile-hero-description p {
+        color: #555;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .mobile-hero-description .buttons {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        /* z-index: 101; */
+    }
+
+    .mobile-hero-description .buttons .custom-btn {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+        position: relative;
+        /* z-index: 102; */
+        pointer-events: auto;
+    }
+}
+
+/* ========================================
    Typing Animation for Hero
 ======================================== */
 .typing-cursor {
