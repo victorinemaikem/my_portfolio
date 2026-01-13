@@ -28,11 +28,11 @@
     <link rel="stylesheet" href="{% static 'css/plugins/owl.carousel.min.css' %}">
 
     <!-- Main Style -->
-    <link rel="stylesheet" id="main_style" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <link rel="stylesheet" id="main_style" href="{% static 'css/style.css' %}?v=2">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}?v=2">
 
     <!-- Enhanced Dynamic Styles -->
-    <link rel="stylesheet" href="{% static 'css/enhanced.css' %}">
+    <link rel="stylesheet" href="{% static 'css/enhanced.css' %}?v=2">
 
 </head>
 
@@ -289,7 +289,8 @@
                                     <div class="timeline-info">
                                         <span>{{ exp.date_range }}</span>
                                     </div>
-                                    <h5 class="timeline-title">{{ exp.organization }} <span class="sub">- {{exp.role}}</span></h5>
+                                    <h5 class="timeline-title">{{ exp.organization }} <span class="sub">-
+                                            {{exp.role}}</span></h5>
 
                                     <p>{{ exp.description }}</p>
                                 </div>
@@ -361,7 +362,8 @@
                                                         <p class="bx-modal-lead">{{ project.description }}</p>
                                                         {% if project.link %}
                                                         <a href="{{ project.link }}" target="_blank"
-                                                            class="custom-btn bx-btn mt-3" style="color: white;">View Project</a>
+                                                            class="custom-btn bx-btn mt-3" style="color: white;">View
+                                                            Project</a>
                                                         {% endif %}
                                                     </div>
                                                 </div>
@@ -375,7 +377,7 @@
                                                     <img src="{% static 'img/portfolio/img-1.jpg' %}"
                                                         alt="{{ project.title }}">
                                                     {% endif %}
-                                                    <h3>{% for cat in project.categories.all %}<span>{{cat.name}}</span>{% endfor %}</h3>
+                                                    <h3>{% for cat in project.categories.all%}<span>{{cat.name}}</span>{% endfor %}</h3>
 
                                                     <a class="bx-portfolio-click" data-fancybox
                                                         data-src="#project-{{ project.id }}" href="javascript:;"
@@ -390,20 +392,6 @@
                                                         <a class="info" data-fancybox
                                                             data-src="#project-{{ project.id }}" href="javascript:;"><i
                                                                 class="fa-solid fa-arrow-right"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% empty %}
-                                        <div class="col-lg-4 col-md-6 col-xs-12 mix">
-                                            <div class="hovereffect">
-                                                <div class="portfolio-img">
-                                                    <img src="{% static 'img/portfolio/img-1.jpg' %}" alt="placeholder">
-                                                    <h3><span>Coming Soon</span></h3>
-                                                </div>
-                                                <div class="overlay">
-                                                    <div class="overlay-info">
-                                                        <a class="info" href="#">Projects will appear here</a>
                                                     </div>
                                                 </div>
                                             </div>
