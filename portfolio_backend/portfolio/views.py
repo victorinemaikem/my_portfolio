@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.utils.html import escape
+from django.views.decorators.cache import cache_page
 
 from .models import (
     SiteSettings, Service, Education, Experience, Certification,
@@ -130,3 +131,62 @@ def contact_submit(request):
             'success': False,
             'errors': form.errors
         }, status=400)
+
+
+@cache_page(60 * 60 * 24)  # Cache for 24 hours
+def sitemap_xml(request):
+    """Generate dynamic XML sitemap for SEO."""
+    
+    domain = 'https://victorinemaikem.com'
+    
+    urls = []
+    
+    # Homepage
+    urls.append({
+        'loc': f'{domain}/',
+        'lastmod': '2026-01-20',
+        'changefreq': 'weekly',
+        'priority': '1.0'
+    })
+    
+    # Blog posts
+    blog_posts = BlogPost.objects.filter(is_published=True)
+    for post in blog_posts:
+        urls.append({
+            'loc': f'{domain}/blog/{post.slug}/',
+            'lastmod': post.published_date.strftime('%Y-%m-%d'),
+            'changefreq': 'monthly',
+            'priority': '0.8'
+        })
+    
+    xml_content = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml_content += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    
+    for url in urls:
+        xml_content += '  <url>\n'
+        xml_content += f'    <loc>{url["loc"]}</loc>\n'
+        xml_content += f'    <lastmod>{url["lastmod"]}</lastmod>\n'
+        xml_content += f'    <changefreq>{url["changefreq"]}</changefreq>\n'
+        xml_content += f'    <priority>{url["priority"]}</priority>\n'
+        xml_content += '  </url>\n'
+    
+    xml_content += '</urlset>'
+    
+    return HttpResponse(xml_content, content_type='application/xml')
+
+
+def robots_txt(request):
+    """Serve robots.txt for search engine crawlers."""
+    
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "",
+        "# Disallow admin",
+        "Disallow: /admin/",
+        "",
+        "# Sitemap",
+        "Sitemap: https://victorinemaikem.com/sitemap.xml"
+    ]
+    
+    return HttpResponse("\n".join(lines), content_type="text/plain")

@@ -7,11 +7,69 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-    <title>{{ settings.hero_name|default:"Maikem Victorine" }} - Personal Portfolio.</title>
-    <meta name="keywords" content="Victorine,Maikem,Health Informatics,Health Technology">
-    <meta name="description" content="{{ settings.hero_name|default:" Victorine Maikem" }} - Health Informatics and
-        Health Technology Professional Portfolio.">
-    <meta name="author" content="victorine">
+    <!-- Primary Meta Tags -->
+    <title>Victorine Maikem | Health Informatics & Health Technology Professional</title>
+    <meta name="title" content="Victorine Maikem | Health Informatics & Health Technology Professional">
+    <meta name="description"
+        content="Victorine Maikem is a Health Informatics and Health Technology professional. Explore her portfolio, projects, and insights in healthcare technology.">
+    <meta name="keywords"
+        content="Victorine Maikem, Health Informatics, Health Technology, Healthcare IT, Health Data, Portfolio, Professional">
+    <meta name="author" content="Victorine Maikem">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://victorinemaikem.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://victorinemaikem.com/">
+    <meta property="og:title" content="Victorine Maikem | Health Informatics & Health Technology Professional">
+    <meta property="og:description"
+        content="Victorine Maikem is a Health Informatics and Health Technology professional. Explore her portfolio, projects, and insights in healthcare technology.">
+    <meta property="og:image" content="https://victorinemaikem.com{% static 'img/og-image.jpg' %}">
+    <meta property="og:site_name" content="Victorine Maikem Portfolio">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://victorinemaikem.com/">
+    <meta property="twitter:title" content="Victorine Maikem | Health Informatics & Health Technology Professional">
+    <meta property="twitter:description"
+        content="Victorine Maikem is a Health Informatics and Health Technology professional. Explore her portfolio, projects, and insights in healthcare technology.">
+    <meta property="twitter:image" content="https://victorinemaikem.com{% static 'img/og-image.jpg' %}">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Victorine Maikem",
+        "url": "https://victorinemaikem.com",
+        "image": "https://victorinemaikem.com{% static 'img/hero/hero-image.jpg' %}",
+        "jobTitle": "Health Informatics Professional",
+        "description": "Health Informatics and Health Technology Professional",
+        "sameAs": [
+            "https://www.linkedin.com/in/victorinemaikem/",
+            "https://github.com/victorinemaikem"
+        ],
+        "knowsAbout": ["Health Informatics", "Health Technology", "Healthcare IT", "Data Analytics"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Victorine Maikem Portfolio",
+        "url": "https://victorinemaikem.com",
+        "description": "Professional portfolio of Victorine Maikem - Health Informatics and Health Technology",
+        "author": {
+            "@type": "Person",
+            "name": "Victorine Maikem"
+        }
+    }
+    </script>
 
     <!-- site Favicon -->
     {% if settings.favicon %}
@@ -377,7 +435,7 @@
                                                     <img src="{% static 'img/portfolio/img-1.jpg' %}"
                                                         alt="{{ project.title }}">
                                                     {% endif %}
-                                                    <h3>{% for cat in project.categories.all%}<span>{{cat.name}}</span>{% endfor %}</h3>
+                                                    <h3>{% for cat in project.categories.all %}<span>{{cat.name}}</span>{% endfor %}</h3>
 
                                                     <a class="bx-portfolio-click" data-fancybox
                                                         data-src="#project-{{ project.id }}" href="javascript:;"

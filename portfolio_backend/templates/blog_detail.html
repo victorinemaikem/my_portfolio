@@ -7,11 +7,62 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-    <title>{{ settings.hero_name|default:"Maikem Victorine" }} - Personal Portfolio.</title>
-    <meta name="keywords" content="Victorine,Maikem,Health Informatics,Health Technology">
-    <meta name="description" content="{{ settings.hero_name|default:" Victorine Maikem" }} - Health Informatics and
-        Health Technology Professional Portfolio.">
-    <meta name="author" content="victorine">
+    <!-- Primary Meta Tags -->
+    <title>{{ post.title }} | Victorine Maikem</title>
+    <meta name="title" content="{{ post.title }} | Victorine Maikem">
+    <meta name="description" content="{{ post.excerpt|truncatewords:30 }}">
+    <meta name="keywords" content="Victorine Maikem, {{ post.title }}, Health Informatics, Health Technology, Blog">
+    <meta name="author" content="Victorine Maikem">
+    <meta name="robots" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://victorinemaikem.com/blog/{{ post.slug }}/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://victorinemaikem.com/blog/{{ post.slug }}/">
+    <meta property="og:title" content="{{ post.title }} | Victorine Maikem">
+    <meta property="og:description" content="{{ post.excerpt|truncatewords:30 }}">
+    {% if post.image %}
+    <meta property="og:image" content="https://victorinemaikem.com{{ post.image.url }}">
+    {% endif %}
+    <meta property="og:site_name" content="Victorine Maikem Portfolio">
+    <meta property="article:published_time" content="{{ post.published_date|date:'c' }}">
+    <meta property="article:author" content="Victorine Maikem">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://victorinemaikem.com/blog/{{ post.slug }}/">
+    <meta property="twitter:title" content="{{ post.title }} | Victorine Maikem">
+    <meta property="twitter:description" content="{{ post.excerpt|truncatewords:30 }}">
+    {% if post.image %}
+    <meta property="twitter:image" content="https://victorinemaikem.com{{ post.image.url }}">
+    {% endif %}
+
+    <!-- JSON-LD Structured Data for Article -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{ post.title }}",
+        "description": "{{ post.excerpt|truncatewords:30 }}",
+        {% if post.image %}"image": "https://victorinemaikem.com{{ post.image.url }}",{% endif %}
+        "author": {
+            "@type": "Person",
+            "name": "Victorine Maikem",
+            "url": "https://victorinemaikem.com"
+        },
+        "publisher": {
+            "@type": "Person",
+            "name": "Victorine Maikem"
+        },
+        "datePublished": "{{ post.published_date|date:'c' }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://victorinemaikem.com/blog/{{ post.slug }}/"
+        }
+    }
+    </script>
 
     <!-- site Favicon -->
     {% if settings.favicon %}
