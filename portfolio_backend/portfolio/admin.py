@@ -1,7 +1,9 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import (
     SiteSettings, Service, Education, Experience, Certification,
-    PortfolioCategory, PortfolioProject, BlogPost, ContactSubmission, Comment
+    PortfolioCategory, PortfolioProject, BlogPost, ContactSubmission, Comment,
+    Language, Hackathon, Conference, LeadershipActivity
 )
 
 
@@ -54,9 +56,16 @@ class ExperienceAdmin(admin.ModelAdmin):
 
 @admin.register(Certification)
 class CertificationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'issuer', 'year', 'order', 'is_active')
+    list_display = ('title', 'issuer', 'year', 'image_preview', 'order', 'is_active')
     list_editable = ('order', 'is_active')
     search_fields = ('title', 'issuer')
+    list_filter = ('is_active', 'year')
+    
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="40" height="40" style="object-fit: contain;" />', obj.image.url)
+        return '-'
+    image_preview.short_description = 'Badge'
 
 
 @admin.register(PortfolioCategory)
@@ -114,3 +123,59 @@ class ContactSubmissionAdmin(admin.ModelAdmin):
     
     def has_add_permission(self, request):
         return False
+
+
+# ========================================
+# Credentials Section Admin
+# ========================================
+
+@admin.register(Language)
+class LanguageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'proficiency', 'flag_code', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    list_filter = ('proficiency', 'is_active')
+
+
+@admin.register(Hackathon)
+class HackathonAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date', 'role', 'location', 'image_preview', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    list_filter = ('role', 'is_active')
+    search_fields = ('name', 'location', 'description')
+    date_hierarchy = 'date'
+    
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="35" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+        return '-'
+    image_preview.short_description = 'Image'
+
+
+@admin.register(Conference)
+class ConferenceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'date', 'role', 'location', 'image_preview', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    list_filter = ('role', 'is_active')
+    search_fields = ('name', 'location', 'topic', 'description')
+    date_hierarchy = 'date'
+    
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="35" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+        return '-'
+    image_preview.short_description = 'Image'
+
+
+@admin.register(LeadershipActivity)
+class LeadershipActivityAdmin(admin.ModelAdmin):
+    list_display = ('title', 'organization', 'activity_type', 'start_date', 'image_preview', 'order', 'is_active')
+    list_editable = ('order', 'is_active')
+    list_filter = ('activity_type', 'is_active')
+    search_fields = ('title', 'organization', 'description')
+    date_hierarchy = 'start_date'
+    
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" width="50" height="35" style="object-fit: cover; border-radius: 4px;" />', obj.image.url)
+        return '-'
+    image_preview.short_description = 'Image'

@@ -9,7 +9,8 @@ from django.views.decorators.cache import cache_page
 
 from .models import (
     SiteSettings, Service, Education, Experience, Certification,
-    PortfolioCategory, PortfolioProject, BlogPost, Comment
+    PortfolioCategory, PortfolioProject, BlogPost, Comment,
+    Language, Hackathon, Conference, LeadershipActivity
 )
 from .forms import ContactForm, CommentForm
 
@@ -27,6 +28,11 @@ def index(request):
         'portfolio_projects': PortfolioProject.objects.filter(is_active=True),
         'blog_posts': BlogPost.objects.filter(is_published=True)[:6],
         'contact_form': ContactForm(),
+        # Credentials section
+        'languages': Language.objects.filter(is_active=True),
+        'hackathons': Hackathon.objects.filter(is_active=True),
+        'conferences': Conference.objects.filter(is_active=True),
+        'leadership_activities': LeadershipActivity.objects.filter(is_active=True),
     }
     
     return render(request, 'index.html', context)

@@ -316,23 +316,6 @@
                                 </div>
                             </li>
                             {% endfor %}
-
-                            {% if certifications %}
-                            <li class="timeline-item" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="800">
-                                <div class="timeline-marker"></div>
-                                <div class="timeline-content">
-                                    <div class="timeline-info">
-                                        <span>Professional Certifications</span>
-                                    </div>
-                                    <h5 class="timeline-title">Professional Certifications & Training</h5>
-                                    <ol>
-                                        {% for cert in certifications %}
-                                        <li>{{ cert.title }} ({{ cert.year }})</li>
-                                        {% endfor %}
-                                    </ol>
-                                </div>
-                            </li>
-                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -374,6 +357,172 @@
         </div>
     </section>
     <!-- End Experience & Education Section -->
+
+    <!-- Start Credentials Section -->
+    <section id="credentials" class="bx-credentials-section bx-section padding-tb-80 body-bg">
+        <div class="container">
+            <div class="title" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="300">
+                <p class="light-txt">credentials</p>
+                <h2>My <span class="primary-clr">Credentials</span></h2>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="credentials-tabs" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
+                <button class="credential-tab active" data-tab="languages">🌐 Languages</button>
+                <button class="credential-tab" data-tab="certifications">🏆 Certifications</button>
+                <button class="credential-tab" data-tab="hackathons">💻 Hackathons</button>
+                <button class="credential-tab" data-tab="conferences">🎤 Conferences</button>
+                <button class="credential-tab" data-tab="leadership">⭐ Leadership</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="credentials-content" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="500">
+
+                <!-- Languages Tab -->
+                <div class="credential-panel active" id="languages-panel">
+                    <div class="languages-grid">
+                        {% for lang in languages %}
+                        <div class="language-item">
+                            {% if lang.flag_code %}
+                            <span class="flag-icon fi fi-{{ lang.flag_code }}"></span>
+                            {% endif %}
+                            <div class="language-info">
+                                <h4>{{ lang.name }}</h4>
+                                <div class="proficiency-bar">
+                                    <div class="proficiency-fill" style="width: {{ lang.proficiency_percent }}%"></div>
+                                </div>
+                                <span class="proficiency-label">{{ lang.get_proficiency_display }}</span>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="empty-message">No languages added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Certifications Tab -->
+                <div class="credential-panel" id="certifications-panel">
+                    <div class="credentials-grid">
+                        {% for cert in certifications %}
+                        <div class="credential-card">
+                            {% if cert.image %}
+                            <div class="credential-image">
+                                <img src="{{ cert.image.url }}" alt="{{ cert.title }}">
+                            </div>
+                            {% endif %}
+                            <div class="credential-info">
+                                <h4>{{ cert.title }}</h4>
+                                <p class="issuer">{{ cert.issuer }}</p>
+                                <span class="year">{{ cert.year }}</span>
+                                {% if cert.description %}
+                                <p class="description">{{ cert.description }}</p>
+                                {% endif %}
+                                {% if cert.verification_link %}
+                                <a href="{{ cert.verification_link }}" target="_blank" class="verify-link">Verify →</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="empty-message">No certifications added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Hackathons Tab -->
+                <div class="credential-panel" id="hackathons-panel">
+                    <div class="credentials-grid">
+                        {% for hackathon in hackathons %}
+                        <div class="credential-card {% if hackathon.is_winner %}winner{% endif %}">
+                            {% if hackathon.is_winner %}
+                            <span class="winner-badge">{{ hackathon.get_role_display }}</span>
+                            {% endif %}
+                            {% if hackathon.image %}
+                            <div class="credential-image">
+                                <img src="{{ hackathon.image.url }}" alt="{{ hackathon.name }}">
+                            </div>
+                            {% endif %}
+                            <div class="credential-info">
+                                <h4>{{ hackathon.name }}</h4>
+                                <p class="meta">{{ hackathon.date|date:"M Y" }} {% if hackathon.location %}• {{
+                                    hackathon.location }}{% endif %}</p>
+                                {% if hackathon.description %}
+                                <p class="description">{{ hackathon.description }}</p>
+                                {% endif %}
+                                {% if hackathon.project_link %}
+                                <a href="{{ hackathon.project_link }}" target="_blank" class="project-link">View Project
+                                    →</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="empty-message">No hackathons added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Conferences Tab -->
+                <div class="credential-panel" id="conferences-panel">
+                    <div class="credentials-grid">
+                        {% for conf in conferences %}
+                        <div class="credential-card {% if conf.is_speaker %}speaker{% endif %}">
+                            {% if conf.is_speaker %}
+                            <span class="speaker-badge">{{ conf.get_role_display }}</span>
+                            {% endif %}
+                            {% if conf.image %}
+                            <div class="credential-image">
+                                <img src="{{ conf.image.url }}" alt="{{ conf.name }}">
+                            </div>
+                            {% endif %}
+                            <div class="credential-info">
+                                <h4>{{ conf.name }}</h4>
+                                <p class="meta">{{ conf.date|date:"M Y" }}{% if conf.location %} • {{ conf.location }}{% endif %}</p>
+                                {% if conf.topic %}
+                                <p class="topic"><strong>Topic:</strong> {{ conf.topic }}</p>
+                                {% endif %}
+                                {% if conf.description %}
+                                <p class="description">{{ conf.description }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="empty-message">No conferences added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Leadership Tab -->
+                <div class="credential-panel" id="leadership-panel">
+                    <div class="credentials-grid">
+                        {% for activity in leadership_activities %}
+                        <div class="credential-card">
+                            <span class="type-badge">{{ activity.get_activity_type_display }}</span>
+                            {% if activity.image %}
+                            <div class="credential-image">
+                                <img src="{{ activity.image.url }}" alt="{{ activity.title }}">
+                            </div>
+                            {% endif %}
+                            <div class="credential-info">
+                                <h4>{{ activity.title }}</h4>
+                                <p class="organization">{{ activity.organization }}</p>
+                                <span class="date-range">{{ activity.date_range }}</span>
+                                {% if activity.description %}
+                                <p class="description">{{ activity.description }}</p>
+                                {% endif %}
+                                {% if activity.link %}
+                                <a href="{{ activity.link }}" target="_blank" class="learn-more">Learn More →</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% empty %}
+                        <p class="empty-message">No leadership activities added yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- End Credentials Section -->
 
     <!-- Start Portfolio Section -->
     <section id="portfolio" class="bx-portfolio-section bx-section portfolio padding-tb-80">
@@ -435,7 +584,7 @@
                                                     <img src="{% static 'img/portfolio/img-1.jpg' %}"
                                                         alt="{{ project.title }}">
                                                     {% endif %}
-                                                    <h3>{% for cat in project.categories.all %}<span>{{cat.name}}</span>{% endfor %}</h3>
+                                                    <h3>{% for cat in project.categories.all%}<span>{{cat.name}}</span>{% endfor %}</h3>
 
                                                     <a class="bx-portfolio-click" data-fancybox
                                                         data-src="#project-{{ project.id }}" href="javascript:;"
@@ -616,5 +765,3 @@
     <script src="{% static 'js/enhanced.js' %}?v=3"></script>
 
 </body>
-
-</html>

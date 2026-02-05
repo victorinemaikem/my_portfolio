@@ -111,6 +111,9 @@ class Certification(models.Model):
     title = models.CharField(max_length=200)
     issuer = models.CharField(max_length=200, blank=True)
     year = models.PositiveIntegerField()
+    image = models.ImageField(upload_to='certifications/', blank=True, null=True, help_text="Badge or logo image")
+    description = models.TextField(blank=True)
+    verification_link = models.URLField(blank=True, null=True, help_text="Link to verify certification")
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
     
@@ -215,3 +218,132 @@ class ContactSubmission(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.subject}"
+
+
+class Language(models.Model):
+    """Languages spoken."""
+    
+    PROFICIENCY_CHOICES = [
+        ('native', 'Native'),
+        ('fluent', 'Fluent'),
+        ('intermediate', 'Intermediate'),
+        ('basic', 'Basic'),
+    ]
+    
+    name = models.CharField(max_length=50)
+    proficiency = models.CharField(max_length=20, choices=PROFICIENCY_CHOICES, default='fluent')
+    flag_code = models.CharField(max_length=10, blank=True, help_text="Country code for flag, e.g., 'fr' for French")
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    
+    class Meta:
+        ordering = ['order']
+    
+    def __str__(self):
+        return f"{self.name} ({self.get_proficiency_display()})"
+    
+    @property
+    def proficiency_percent(self):
+        """Return percentage for progress bar."""
+        levels = {'native': 100, 'fluent': 85, 'intermediate': 60, 'basic': 35}
+        return levels.get(self.proficiency, 50)
+
+
+class Hackathon(models.Model):
+    """Hackathons and tech events participated in."""
+    
+    ROLE_CHOICES = [
+        ('winner', '🏆 Winner'),
+        ('runner_up', '🥈 Runner-up'),
+        ('finalist', '🎯 Finalist'),
+        ('participant', 'Participant'),
+        ('mentor', 'Mentor'),
+        ('judge', 'Judge'),
+    ]
+    
+    name = models.CharField(max_length=200)
+    date = models.DateField()
+    location = models.CharField(max_length=200, blank=True)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='participant')
+    image = models.ImageField(upload_to='hackathons/', blank=True, null=True)
+    description = models.TextField(blank=True)
+    project_link = models.URLField(blank=True, null=True, help_text="Link to project or demo")
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    
+    class Meta:
+        ordering = ['order', '-date']
+    
+    def __str__(self):
+        return f"{self.name} ({self.get_role_display()})"
+    
+    @property
+    def is_winner(self):
+        return self.role in ['winner', 'runner_up', 'finalist']
+
+
+class Conference(models.Model):
+    """Conferences attended or spoken at."""
+    
+    ROLE_CHOICES = [
+        ('speaker', '🎤 Speaker'),
+        ('panelist', '👥 Panelist'),
+        ('attendee', 'Attendee'),
+    ]
+    
+    name = models.CharField(max_length=200)
+    date = models.DateField()
+    location = models.CharField(max_length=200, blank=True)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='attendee')
+    topic = models.CharField(max_length=300, blank=True, help_text="Talk/panel topic if speaker")
+    image = models.ImageField(upload_to='conferences/', blank=True, null=True)
+    description = models.TextField(blank=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    
+    class Meta:
+        ordering = ['order', '-date']
+    
+    def __str__(self):
+        return f"{self.name} ({self.get_role_display()})"
+    
+    @property
+    def is_speaker(self):
+        return self.role in ['speaker', 'panelist']
+
+
+class LeadershipActivity(models.Model):
+    """Leadership, volunteering, and impact activities."""
+    
+    TYPE_CHOICES = [
+        ('training', '📚 Training Program'),
+        ('mentoring', '🎓 Mentoring'),
+        ('volunteering', '🤝 Volunteering'),
+        ('fellowship', '⭐ Fellowship'),
+        ('recognition', '🏅 Recognition'),
+    ]
+    
+    title = models.CharField(max_length=200)
+    organization = models.CharField(max_length=200)
+    activity_type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='training')
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
+    image = models.ImageField(upload_to='leadership/', blank=True, null=True)
+    description = models.TextField(blank=True)
+    link = models.URLField(blank=True, null=True)
+    order = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
+    
+    class Meta:
+        ordering = ['order', '-start_date']
+        verbose_name = "Leadership Activity"
+        verbose_name_plural = "Leadership Activities"
+    
+    def __str__(self):
+        return f"{self.title} - {self.organization}"
+    
+    @property
+    def date_range(self):
+        if self.end_date:
+            return f"{self.start_date.strftime('%b %Y')} – {self.end_date.strftime('%b %Y')}"
+        return f"{self.start_date.strftime('%b %Y')} – Present"
