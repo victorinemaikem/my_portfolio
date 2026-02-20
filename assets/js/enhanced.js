@@ -402,11 +402,29 @@
         initSectionReveal();
         initPortfolioFilter();
         initNavbarScroll();
+        initCredentialsTabs();
 
         // Add pulse animation to CTA buttons
         $('.bx-btn').addClass('pulse-animation');
 
         console.log('✨ Enhanced dynamic features initialized');
     });
+
+    // ========================================
+    // Credentials Tabs
+    // ========================================
+    function initCredentialsTabs() {
+        $('.credential-tab').on('click', function () {
+            const tabId = $(this).data('tab');
+
+            // Update active tab
+            $('.credential-tab').removeClass('active');
+            $(this).addClass('active');
+
+            // Update active panel
+            $('.credential-panel').removeClass('active');
+            $('#' + tabId + '-panel').addClass('active');
+        });
+    }
 
 })(jQuery);

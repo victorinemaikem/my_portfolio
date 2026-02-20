@@ -656,3 +656,335 @@
         justify-content: center;
     }
 }
+
+/* ========================================
+   Credentials Section - Refined Design
+======================================== */
+.bx-credentials-section {
+    background-color: #f6f8ff;
+}
+
+.bx-credentials-section .title {
+    text-align: center;
+}
+
+.bx-credentials-section .title p {
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #777;
+}
+
+.bx-credentials-section .title h2 {
+    margin-bottom: 30px;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+/* Tab Navigation - Refined Pills */
+.credentials-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+}
+
+.credential-tab {
+    background: transparent;
+    border: 2px solid rgba(121, 99, 224, 0.25);
+    color: #17181c;
+    padding: 12px 28px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.credential-tab:hover {
+    background: rgba(121, 99, 224, 0.08);
+    border-color: rgba(121, 99, 224, 0.5);
+    transform: translateY(-2px);
+}
+
+.credential-tab.active {
+    background: #7963e0;
+    color: #fff;
+    border-color: #7963e0;
+    box-shadow: 0 8px 25px rgba(121, 99, 224, 0.35);
+}
+
+/* Tab Panels */
+.credential-panel {
+    display: none;
+    animation: credentialFadeIn 0.4s ease;
+}
+
+.credential-panel.active {
+    display: block;
+}
+
+@keyframes credentialFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Languages - Clean Two Column */
+.languages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.language-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.language-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(121, 99, 224, 0.12);
+    border-color: rgba(121, 99, 224, 0.3);
+}
+
+.language-item .flag-icon {
+    font-size: 2.2rem;
+}
+
+.language-info {
+    flex: 1;
+}
+
+.language-info h4 {
+    color: #17181c;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.proficiency-bar {
+    width: 100%;
+    height: 6px;
+    background: #e8e8e8;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.proficiency-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7963e0, #9b8cf0);
+    border-radius: 3px;
+    transition: width 1s ease;
+}
+
+.proficiency-label {
+    color: #777;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    display: block;
+    font-weight: 500;
+}
+
+/* Credentials Grid - Clean Cards */
+.credentials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Credential Cards - Refined */
+.credential-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.credential-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 35px rgba(121, 99, 224, 0.15);
+    border-color: rgba(121, 99, 224, 0.3);
+}
+
+.credential-card.winner,
+.credential-card.speaker {
+    border-color: #7963e0;
+    border-width: 2px;
+}
+
+.credential-image {
+    width: 100%;
+    height: 160px;
+    overflow: hidden;
+    background: #f6f8ff;
+}
+
+.credential-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.credential-card:hover .credential-image img {
+    transform: scale(1.05);
+}
+
+.credential-info {
+    padding: 22px 25px;
+}
+
+.credential-info h4 {
+    color: #17181c;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1.4;
+}
+
+.credential-info .issuer,
+.credential-info .organization,
+.credential-info .meta {
+    color: #777;
+    font-size: 0.9rem;
+    margin: 0 0 8px 0;
+}
+
+.credential-info .year,
+.credential-info .date-range {
+    display: inline-block;
+    background: rgba(121, 99, 224, 0.1);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #7963e0;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.credential-info .description {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 12px 0 0;
+}
+
+.credential-info .topic {
+    color: #17181c;
+    font-size: 0.9rem;
+    margin: 10px 0;
+}
+
+.credential-info a {
+    color: #7963e0;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.credential-info a:hover {
+    color: #5a4ac7;
+    text-decoration: underline;
+}
+
+/* Badges - Refined */
+.winner-badge,
+.speaker-badge,
+.type-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: 'Quicksand', sans-serif;
+    z-index: 2;
+    letter-spacing: 0.3px;
+}
+
+.winner-badge {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #1a1a2e;
+}
+
+.speaker-badge {
+    background: #7963e0;
+    color: #fff;
+}
+
+.type-badge {
+    background: #fff;
+    color: #7963e0;
+    border: 1px solid rgba(121, 99, 224, 0.3);
+}
+
+.empty-message {
+    color: #777;
+    text-align: center;
+    padding: 50px 20px;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+/* Mobile Responsive */
+@media only screen and (max-width: 991px) {
+    .credentials-tabs {
+        gap: 10px;
+    }
+
+    .credential-tab {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .credentials-tabs {
+        gap: 8px;
+    }
+
+    .credential-tab {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .credentials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .languages-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .language-item {
+        padding: 20px;
+    }
+}
