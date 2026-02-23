@@ -584,7 +584,8 @@
                                                     <img src="{% static 'img/portfolio/img-1.jpg' %}"
                                                         alt="{{ project.title }}">
                                                     {% endif %}
-                                                    <h3>{% for cat in project.categories.all%}<span>{{cat.name}}</span>{% endfor %}</h3>
+                                                    <h3>{% for cat in project.categories.all%}<span>{{cat.name}}</span>{% endfor %}
+                                                    </h3>
 
                                                     <a class="bx-portfolio-click" data-fancybox
                                                         data-src="#project-{{ project.id }}" href="javascript:;"
@@ -593,8 +594,8 @@
                                                 <div class="overlay">
                                                     <div class="overlay-info">
                                                         <a class="info" data-fancybox
-                                                            data-src="#project-{{ project.id }}" href="javascript:;">
-                                                            {{project.title }}</a>
+                                                            data-src="#project-{{ project.id }}"
+                                                            href="javascript:;">{{project.title }}</a>
 
                                                         <a class="info" data-fancybox
                                                             data-src="#project-{{ project.id }}" href="javascript:;"><i
@@ -636,11 +637,13 @@
                                     <a href="{% url 'portfolio:blog_detail' post.slug %}" class="card-link">
                                         <div class="card" data-aos="fade-up" data-aos-duration="2000"
                                             data-aos-delay="400">
-                                            {% if post.image %}
-                                            <img src="{{ post.image.url }}" alt="{{ post.title }}">
-                                            {% else %}
-                                            <img src="{% static 'img/news/img-2.jpg' %}" alt="{{ post.title }}">
-                                            {% endif %}
+                                            <div class="blog-thumb-wrapper">
+                                                {% if post.image %}
+                                                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                                                {% else %}
+                                                <img src="{% static 'img/news/img-2.jpg' %}" alt="{{ post.title }}">
+                                                {% endif %}
+                                            </div>
                                             <div class="news-card-details">
                                                 <p class="primary-clr">By {{ post.author }} <span class="comments">-
                                                         {{post.comments_count }} Comments</span></p>
@@ -655,7 +658,9 @@
                                 {% empty %}
                                 <div class="item">
                                     <div class="card" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="400">
-                                        <img src="{% static 'img/news/img-2.jpg' %}" alt="">
+                                        <div class="blog-thumb-wrapper">
+                                            <img src="{% static 'img/news/img-2.jpg' %}" alt="">
+                                        </div>
                                         <div class="news-card-details">
                                             <p class="primary-clr">By Admin <span class="comments">- 0 Comments</span>
                                             </p>
